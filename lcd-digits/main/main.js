@@ -1,6 +1,6 @@
 function printLcd(input) {
-    var newArray = splitInput(input);
-    var lcdDigits = buildLcdDigits(newArray);
+    var digitArray = splitInput(input);
+    var lcdDigits = matchLcdDigits(digitArray);
     var string = getLcdDigit(lcdDigits);
     console.log(string);
 }
@@ -10,11 +10,11 @@ function splitInput(input) {
     return input.split("");
 }
 
-function buildLcdDigits(newArray) {
+function matchLcdDigits(digitArray) {
     var allDigits = loadAllLcdDigits();
     var lcdDigits = [];
 
-    newArray.forEach(function (array) {
+    digitArray.forEach(function (array) {
         for (var i = 0; i < allDigits.length; i++) {
             if (array === allDigits[i].name) {
                 lcdDigits.push({num: allDigits[i].num});

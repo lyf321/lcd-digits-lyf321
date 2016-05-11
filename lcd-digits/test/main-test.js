@@ -7,7 +7,7 @@ describe('lcd-digits', function () {
         allDigits = loadAllLcdDigits();
     });
 
-    it('should print correct', function () {
+    it('should print correct text', function () {
 
         spyOn(console, 'log');
 
@@ -22,60 +22,64 @@ describe('lcd-digits', function () {
     });
 });
 
-describe('splitInput', function () {
-    var input;
+describe('unit test', function () {
 
-    beforeEach(function () {
-        input = '910';
-    });
-    it('should print correct', function () {
-        var newArray = splitInput(input);
+    describe('splitInput', function () {
+        var input;
 
-        var expectText = ['9', '1', '0'];
+        beforeEach(function () {
+            input = '910';
+        });
+        it('should return correct digitArray', function () {
+            var digitArray = splitInput(input);
 
-        expect(newArray).toEqual(expectText);
-    });
-});
+            var expectText = ['9', '1', '0'];
 
-describe('buildLcdDigits', function () {
-    var newArray;
-
-    beforeEach(function () {
-        newArray = ['9', '1', '0'];
+            expect(digitArray).toEqual(expectText);
+        });
     });
 
-    it('should print correct', function () {
-        var lcdDigits = buildLcdDigits(newArray);
+    describe('matchLcdDigits', function () {
+        var digitArray;
 
-        var expectText = [
-            {num: ['._.', '|_|', '..|']},
-            {num: ['...', '..|', '..|']},
-            {num: ['._.', '|.|', '|_|']}
-        ];
+        beforeEach(function () {
+            digitArray = ['9', '1', '0'];
+        });
 
-        expect(lcdDigits).toEqual(expectText);
-    });
-});
+        it('should return correct lcdDigits', function () {
+            var lcdDigits = matchLcdDigits(digitArray);
 
-describe('', function () {
-    var lcdDigits;
+            var expectText = [
+                {num: ['._.', '|_|', '..|']},
+                {num: ['...', '..|', '..|']},
+                {num: ['._.', '|.|', '|_|']}
+            ];
 
-    beforeEach(function () {
-        lcdDigits = [
-            {num: ['._.', '|_|', '..|']},
-            {num: ['...', '..|', '..|']},
-            {num: ['._.', '|.|', '|_|']}
-        ];
+            expect(lcdDigits).toEqual(expectText);
+        });
     });
 
-    it('should print correct', function () {
-        var string = getLcdDigit(lcdDigits);
+    describe('getLcdDigit', function () {
+        var lcdDigits;
 
-        var expectText =
-            '\n._....._.\n' +
-            '|_|..||.|\n' +
-            '..|..||_|\n';
+        beforeEach(function () {
+            lcdDigits = [
+                {num: ['._.', '|_|', '..|']},
+                {num: ['...', '..|', '..|']},
+                {num: ['._.', '|.|', '|_|']}
+            ];
+        });
 
-        expect(string).toEqual(expectText);
+        it('should return correct string', function () {
+            var string = getLcdDigit(lcdDigits);
+
+            var expectText =
+                '\n._....._.\n' +
+                '|_|..||.|\n' +
+                '..|..||_|\n';
+
+            expect(string).toEqual(expectText);
+        });
     });
+
 });
